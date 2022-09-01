@@ -63,6 +63,17 @@ VALUES
 
  --- What is the total amount each customer spent at the restaurant?
 
+We can try this 
+~~~~~~~~~~
+select s.customer_id, sum(m.price)
+ from dannys_diner.sales as s
+ join dannys_diner.menu as m
+ on s.product_id=m.product_id  group by s.customer_id
+ 
+ ~~~~~~
+
+Below is fine, but no need for subquery here, will impact SQL performance for million records 
+
  select customer_id, sum(price) as total_money_spent
  from
  (select s.*, m.product_name, m.price
